@@ -1,11 +1,11 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      steps {
-        sh 'mvn'
-      }
-    }
+  stage('Compile-Package'){
+     // Get maven home path
+     def mvnHome =  tool name: 'maven-3', type: 'maven'
+     sh "${mvnHome}/bin/mvn package"
+  }
     stage('Fetch from S3') {
       steps {
         sh 'echo Fetch from S3'
